@@ -1,0 +1,20 @@
+---
+# Install Joplin desktop client
+#
+#
+- name: INCLUDE APPIMAGE INSTALLATION ROLE
+  include_role:
+    name: appimage
+  vars:
+    appimage_download_urls:
+      - url: "{{ joplin_client_desktop_appimage_url }}"
+        name: joplin-desktop
+        state: present
+
+- name: MANAGE CONFIG DIRECTORYE
+  file:
+    state: directory
+    path: "{{ joplin_dir_user_config }}"
+    owner: "{{ joplin_user }}"
+    group: "{{ joplin_user }}"
+    mode: '0755'

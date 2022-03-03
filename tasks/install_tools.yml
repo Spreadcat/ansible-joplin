@@ -1,0 +1,9 @@
+---
+
+- name: MANAGE JOPLINCLEAN
+  copy:
+    src: joplinclean
+    dest: /usr/local/bin/joplinclean
+    owner: 'root'
+    group: 'root'
+    mode: '0755'

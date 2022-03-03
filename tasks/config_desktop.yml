@@ -1,0 +1,21 @@
+---
+- name: READ CONFIG FILE
+  set_fact:
+    joplin_desktop_config_jsondata: "{{ lookup('file', joplin_desktop_path_config_file)|from_json }}"
+
+- name: UPDATE JOPLIN DESKTOP SETTINGS
+  set_fact:
+    joplin_desktop_config_jsondata: >-
+      {% for key, value in joplin_desktop_config_settings.items() -%}
+      {% set _ = joplin_desktop_config_jsondata.__setitem__( key, value ) -%}
+      {% endfor -%}
+      {{ joplin_desktop_config_jsondata }}
+
+- name: WRITE JOPLIN DESKTOP SETTINGS
+  copy:
+    dest: "{{ joplin_desktop_path_config_file }}"
+    content: "{{ joplin_desktop_config_jsondata|to_nice_json }}"
+    force: true
+    mode: '0644'
+    owner: "{{ joplin_user }}"
+    group: "{{ joplin_user }}"

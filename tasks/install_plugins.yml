@@ -1,0 +1,22 @@
+---
+- name: MANAGE PLUGIN DIRECTORY
+  file:
+    state: directory
+    path: "{{ joplin_dir_user_config }}/plugins"
+    owner: "{{ joplin_user }}"
+    group: "{{ joplin_user }}"
+    mode: '0755'
+
+- name: MANAGE PLUGINS
+  when:
+    - joplin_plugins is iterable
+    - joplin_plugins|length > 0
+    - joplin_plugins_data[item] is defined
+  get_url:
+    url: "{{ joplin_plugins_data[item|lower]['url'] }}"
+    dest: "{{ joplin_dir_user_config }}/plugins/{{ joplin_plugins_data[item]['filename'] }}"
+    owner: "{{ joplin_user }}"
+    group: "{{ joplin_user }}"
+    mode: '0644'
+  loop: "{{ joplin_plugins }}"
+...

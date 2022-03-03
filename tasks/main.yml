@@ -1,0 +1,15 @@
+---
+# tasks file for joplin
+- include: install_cli.yml
+  when: joplin_client_cli|bool
+
+- name: MANAGE JOPLIN DESKTOP
+  when: joplin_client_desktop|bool
+  block:
+    - include: install_desktop.yml
+    - include: install_plugins.yml
+    - include: config_desktop.yml
+
+- include: install_tools.yml
+  when: joplin_install_tools|bool
+...

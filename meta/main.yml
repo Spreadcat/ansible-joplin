@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Daniel Buøy-Vehn
+  description: |
+    Role to setup joplin CLI and joplin Desktop on Fedora based machines.
+  role_name: joplin
+  namespace: spreadcat
+
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: rhel
+      versions:
+        - 8
+
+  galaxy_tags: []
+
+dependencies: []
+...
