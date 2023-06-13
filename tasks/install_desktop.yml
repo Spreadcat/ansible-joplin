@@ -1,9 +1,7 @@
 ---
 # Install Joplin desktop client
-#
-#
-- name: INCLUDE APPIMAGE INSTALLATION ROLE
-  include_role:
+- name: Install_desktop | Include appimage installation role.
+  ansible.builtin.include_role:
     name: appimage
   vars:
     appimage_download_urls:
@@ -11,8 +9,8 @@
         name: joplin-desktop
         state: present
 
-- name: MANAGE CONFIG DIRECTORYE
-  file:
+- name: Install_desktop | Manage config directories.
+  ansible.builtin.file:
     state: directory
     path: "{{ joplin_dir_user_config }}"
     owner: "{{ joplin_user }}"

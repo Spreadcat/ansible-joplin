@@ -1,19 +1,19 @@
 ---
-- name: MANAGE PLUGIN DIRECTORY
-  file:
+- name: Install_plugins | Manage plugin directory.
+  ansible.builtin.file:
     state: directory
     path: "{{ joplin_dir_user_config }}/plugins"
     owner: "{{ joplin_user }}"
     group: "{{ joplin_user }}"
     mode: '0755'
 
-- name: MANAGE PLUGINS
+- name: Install_plugins | Manage plugins.
   when:
     - joplin_plugins is iterable
     - joplin_plugins|length > 0
     - joplin_plugins_data[item] is defined
-  get_url:
-    url: "{{ joplin_plugins_data[item|lower]['url'] }}"
+  ansible.builtin.get_url:
+    url: "{{ joplin_plugins_data[item | lower]['url'] }}"
     dest: "{{ joplin_dir_user_config }}/plugins/{{ joplin_plugins_data[item]['filename'] }}"
     owner: "{{ joplin_user }}"
     group: "{{ joplin_user }}"

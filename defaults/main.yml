@@ -1,32 +1,125 @@
 ---
 # defaults file for joplin
+
+# If set to true, this will install the joplin CLI client.
 #
+# Example:
+#   joplin_client_cli: true
 #
-# install the Joplin CLI client
+# doca tags: role
 joplin_client_cli: false
 
+# If set to true, this option will install the joplin desktop
+# client on the host.
+#
+# Example:
+#   joplin_client_desktop: true
+#
+# doca tags:role
 joplin_client_desktop: false
 
-joplin_client_cli_package: joplin
+# Sets the name of the joplin client package to use.
+#
+# Example:
+#   joplin_client_cli_package: "joplin"
+#
+# doca tags:other
+joplin_client_cli_package: "joplin"
 
+# Sets the default appimage url for joplin desktop to install
+# via appimage.
+#
+# When the appimage installation has been enabled, this url will be
+# used.
+#
+# Example:
+#   joplin_client_Desktop_appimage_url: >-
+#     https://github.com/joplin/image.AppImage
+#
+# doca tags:other
 joplin_client_desktop_appimage_url: 'https://github.com/laurent22/joplin/releases/download/v2.6.10/Joplin-2.6.10.AppImage'
 
+# Sets the path to the user configuration directory for joplin.
+#
+# Example:
+#   joplin_dir_user_.config: "/home/user/.config/joplin-desktop"
+#
+# doca tags:other
 joplin_dir_user_config: "{{ lookup('env', 'HOME') }}/.config/joplin-desktop"
 
-# Default path to the joplin desktop config file
+# Sets the path to the joplin desktop configuration file.
+#
+# Example:
+#   joplin_desktop_path_config_file: "/home/user/.config/joplin-desktop/settings.json"
+#
+# doca tags:other
 joplin_desktop_path_config_file: "{{ joplin_dir_user_config }}/settings.json"
 
 # Default Changes to the configuration
+# List of configuration settings for Joplin Desktop.
+#
+# Example:
+#   joplin_desktop_config_settings:
+#     sync.interval: 1800
+#     theme: 2
+#     showCOmpletedTodos: 'false'
+#
+# doca tags:role
 joplin_desktop_config_settings: {}
 
+# Sets the username of the user that shall use joplin.
+#
+# Defaults to the current user running the role.
+#
+# Example:
+#   joplin_user: "jdoe"
+#
+# doca tags:other
 joplin_user: "{{ lookup('env', 'USER') }}"
 
-# Enabled/Disable the installation of additional tools for joplin
-# See the README.md for details.
+# If set to true this parameter till install additional tools for joplin
+# onto the host system.
+#
+# See the README.md files for details about what exactly.
+#
+# Example:
+#   joplin_install_tools: true
+#
+# doca tags:role
 joplin_install_tools: false
 
+# List of plugins to install for Joplin Desktop.
+#
+# The list expects the names of the plugins to be installed.
+# The correct names of the plugins are defined in joplin_plugins_data.
+#
+# Example:
+#   joplin_plugins:
+#     - link_graph_ui
+#     - math_mode
+#     - favorites
+#
+# doca tags:role
 joplin_plugins: []
 
+# Joplin plugin data for reference use in `joplin_plugins`.
+#
+# This defines each supported plugin with the source url from where it to
+# install. To fields are required:
+#
+# * filename: sets the filename under which to store the plugin in the joplin
+#   configuration directory.
+# * url: The web url from where to retrieve the plugin.
+#
+# This variable usually does not require any changes.
+#
+# Example:
+#   joplin_plugins_data:
+#     make_all_links:
+#       filename: com.s73ph4n.make_all_links.jpl
+#       url: 'https://github.com/joplin/plugins/raw/master/plugins/com.s73ph4n.make_all_links/plugin.jpl'
+#
+# doca tags:other
 joplin_plugins_data:
   automatic_backlinks_to_note:
     filename: joplin.plugin.ambrt.backlinksToNote.jpl

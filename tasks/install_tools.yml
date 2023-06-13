@@ -1,7 +1,6 @@
 ---
-
-- name: MANAGE JOPLINCLEAN
-  copy:
+- name: Install_tools | Manage joplinclean.
+  ansible.builtin.copy:
     src: joplinclean
     dest: /usr/local/bin/joplinclean
     owner: 'root'
